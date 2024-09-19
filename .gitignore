@@ -173,3 +173,6 @@ __pycache__/
 venv/
 *.sqlite3
 *.log
+
+backend/venv/
+
