@@ -1,0 +1,527 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the start of the container */
+    height: 85vh; /* Full viewport height */
+
+    padding: 1rem;
+    box-sizing: border-box; /* Ensure padding is included in height calculations */
+    padding-top: 5vh; /* Add top padding to position the form slightly lower */
+    margin-bottom: 25vh;
+}
+.welcome-message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    animation: fadeIn 1s ease-out; /* Extend fade-in duration */
+}
+
+.welcome-message {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    animation: slideInUp 1s ease-out, fadeOut 1s ease-in 2.5s forwards; /* Extend visibility and fade-out duration */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
+
+/* To disable built-in eye icon for browsers that add it */
+input[type="password"]::-ms-reveal, 
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-clear-button,
+input[type="password"]::-webkit-inner-spin-button {
+    display: none !important;
+}
+
+.auth-field.password-field {
+    position: relative;
+}
+
+.auth-field.password-field input {
+    padding-right: 40px; /* Space for the icon */
+    box-sizing: border-box;
+    width: 100%; /* Ensure input field takes full width */
+    border-radius: 8px;
+    appearance: none !important;
+}
+
+.password-toggle-icon1 {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ff6600; /* Theme color */
+}
+
+.password-toggle-icon:hover {
+    color: #764ba2;
+}
+
+.auth-field.password-field input {
+    padding-right: 2.5rem; /* Ensure consistent padding */
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
+}
+
+/* Error message styling */
+.auth-error {
+    color: #e74c3c; /* Red color for error messages */
+    font-size: 0.875rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Adjusting input focus to indicate error */
+.auth-field input:focus.invalid {
+    border-color: #e74c3c; /* Red border color for invalid fields */
+    background-color: #ffe6e6;
+}
+
+/* Adjust hover and focus state for inputs with errors */
+.auth-field input.invalid:hover,
+.auth-field input.invalid:focus {
+    border-color: #e74c3c; /* Red border color for invalid fields */
+    background-color: #ffe6e6;
+    outline: none;
+}
+/* Background Overlay Animation */
+.confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out; /* Add fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal Animation */
+.confirmation-modal {
+    background-color: white;
+    padding: 4.7rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    animation: scaleIn 0.5s ease-in-out; /* Add scale-in animation */
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.checkmark-circle {
+    color: #4caf50;
+    margin-bottom: 1.5rem;
+    animation: popIn 0.6s ease-in-out;
+}
+
+
+/* Button Styles */
+.confirmation-button {
+    background: #ff6600;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    margin: 1rem; /* Add margin between buttons */
+    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-button:hover {
+    background: #ff6600;
+    transform: translateY(-3px); /* Button lift effect on hover */
+}
+.animated-title {
+    margin-bottom: 20px; 
+    /* Adjust this value to increase/decrease the space */
+    font-size: 2.5rem;
+    background: #ff6600;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    align-items: center !important;
+    gap: 10px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+
+/* Button Focus State */
+.confirmation-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.4); /* Custom focus ring */
+}
+@keyframes buttonBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.confirmation-message {
+    margin-bottom: 1.5rem;
+    color: #666;
+    font-size: 1.2rem;
+    animation: fadeIn 1s ease-in-out;
+}
+/* Title Animation */
+.confirmation-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #ff6600;
+    animation: fadeInDown 0.7s ease-in-out;
+}
+
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-form {
+    background-color: white;
+    padding: 1.5rem; /* Adjusted padding */
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px;
+    animation: fadeInUp 0.5s ease-in-out;
+    overflow-y: auto; /* Allow form to scroll if necessary */
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    margin-bottom: 1rem; /* Reduce margin-bottom */
+    color: #333;
+    text-align: center;
+    font-size: 2rem; /* Slightly reduced font size */
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+.auth-field-inline {
+    display: flex;
+    gap: 1rem;
+}
+
+.auth-field-inline .auth-field {
+    flex: 1;
+}
+
+.auth-field input {
+    padding: 0.8rem; /* Reduce padding to make the fields smaller */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem; /* Reduce font size slightly */
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.auth-field input:focus {
+    border-color:#ff6600; /* Theme color */
+    outline: none;
+}
+/* Auth Select (Dropdown) Styling */
+.auth-select {
+    padding: 0.8rem; /* Match padding of input fields */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem; /* Match font size of input fields */
+    width: 100%;
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transition for background color */
+    appearance: none; /* Remove default browser styles */
+    background-color: #f0f4f8; /* Match the input background color */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23667eea" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center; /* Position the arrow */
+    background-size: 16px 16px; /* Size of the arrow */
+}
+
+.auth-select:focus {
+    border-color: #ff6600; /* Theme color */
+    outline: none;
+    background-color: #eaf2ff; /* Match the focus background color of input fields */
+}
+
+.auth-select.invalid {
+    border-color: #e74c3c; /* Red border color for invalid fields */
+    background-color: #ffe6e6;
+}
+
+/* Auth Select (Dropdown) Styling */
+/* General select field styling to match input fields */
+/* Set the text color for the select field */
+.auth-select {
+    background-color: #f8f9fa; /* Same background color as inputs */
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    appearance: none;
+    box-sizing: border-box;
+    color: #6c757d; /* Match placeholder text color */
+    font-weight: 400; /* Match placeholder font weight */ /* Set text color to match other input fields */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23667eea" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center; /* Position the arrow */
+    background-size: 35px 35px; /* Size of the arrow */
+}
+
+/* Set text color when the select field is focused */
+.auth-select:focus {
+    border-color:#ff6600; /* Focus border color */
+    background-color: #eef2ff; /* Focus background color */
+    outline: none;
+    color: #333; /* Ensure text color stays consistent on focus */
+}
+
+
+/* Remove the focus outline for normal states */
+.auth-select:not(:focus) {
+    outline: none;
+    background-color: #f8f9fa; /* Same as the non-focused state */
+    border-color: #ccc; /* Match input field border */
+}
+
+
+
+.auth-select.invalid {
+    border-color: #e74c3c; /* Red border color for invalid fields */
+    background-color: #ffe6e6;
+}
+
+.auth-select.invalid:hover,
+.auth-select.invalid:focus {
+    border-color: #e74c3c; /* Red border color for invalid fields */
+    background-color: #ffe6e6;
+    outline: none;
+}
+
+.auth-select option {
+    color: #333; /* Option text color */
+}
+
+/* For consistency with other input fields */
+.auth-field select {
+    padding-right: 2.5rem; /* Ensure consistent padding */
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
+}
+
+@media (max-width: 768px) {
+    .auth-select {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
+}
+
+
+.auth-select option {
+    color: #333; /* Option text color */
+}
+
+/* For consistency with other input fields */
+.auth-field select {
+    padding-right: 2.5rem; /* Ensure consistent padding */
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
+}
+
+@media (max-width: 768px) {
+    .auth-select {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
+}
+
+.auth-button {
+    background: #ff6600;
+    color: white;
+    padding: 1rem;
+    border: none;
+    margin-top: 5%;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem; /* Reduce font size slightly */
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.auth-button:hover {
+    background: #ff6600;
+    transform: translateY(-3px);
+}
+
+.auth-toggle {
+    text-align: center;
+    color: #666;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.auth-toggle span {
+    color:#ff6600;  /* Theme color */
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-toggle span:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .auth-form {
+        padding: 1rem; /* Further reduce padding for smaller screens */
+        max-width: 90%;
+    }
+
+    .auth-field-inline {
+        flex-direction: column;
+    }
+
+    .auth-field-inline .auth-field {
+        width: 100%;
+    }
+}

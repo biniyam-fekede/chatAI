@@ -1,0 +1,40 @@
+html, body {
+    height: 100%; /* Ensure body takes full viewport height */
+    margin: 0;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Make container full viewport height */
+}
+
+main {
+    flex: 1; /* Expand main content to push footer down */
+}
+
+/* Footer styles */
+.footer {
+    padding: 1rem 0; /* Adjust padding for a compact footer */
+    text-align: center;
+    margin-top: auto; /* Keep footer at the bottom */
+    font-size: 0.9rem; /* Set font size */
+    background-color: #f7f7f7 !important; /* Light gray background */
+    padding: 0.2rem 1rem; /* Narrower padding for a slimmer navbar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9); /* Subtle shadow */
+
+}
+
+
+.footer-link {
+    color: #ff6600; /* Custom link color */
+    text-decoration: none; /* Remove underline */
+    margin: 0 0.5rem; /* Add space between links */
+}
+p {
+    color:  #ff6600;
+}
+
+.footer-link:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
