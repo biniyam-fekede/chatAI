@@ -1,0 +1,298 @@
+/* Base Navbar Styles */
+.navbar {
+    background-color: #f1f1f1; /* Light gray background */
+    padding: 0.2rem 1rem; /* Narrower padding for a slimmer navbar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.navbar-logo {
+    width: 150px !important; /* Maintain the logo size */
+    height: auto; /* Maintain aspect ratio */
+}
+/* Styling for the custom menu icon */
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px; /* Increased width for larger icon */
+    height: 30px; /* Increased height for larger icon */
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    position: relative; /* Ensure the bars stay in the correct place */
+}
+
+.menu-icon .bar1, .menu-icon .bar2, .menu-icon .bar3 {
+    height: 4px; /* Make the bars thicker for better visibility */
+    width: 100%;
+    background: #FF6600; /* Apply theme color gradient */
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px; /* Rounded corners for bars */
+    position: absolute; /* Position bars absolutely within the container */
+    left: 0;
+}
+
+.menu-icon .bar1 {
+    top: 0; /* Position bar1 at the top */
+}
+
+.menu-icon .bar2 {
+    top: 50%; /* Center bar2 vertically */
+    transform: translateY(-50%);
+}
+
+.menu-icon .bar3 {
+    bottom: 0; /* Position bar3 at the bottom */
+}
+
+.menu-icon.open .bar1 {
+    transform: rotate(45deg); /* Rotate to form the top-left part of the X */
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg); /* Adjust the position to center */
+}
+
+.menu-icon.open .bar2 {
+    opacity: 0; /* Hide the middle bar */
+}
+
+.menu-icon.open .bar3 {
+    transform: rotate(-45deg); /* Rotate to form the bottom-left part of the X */
+    bottom: 50%;
+    transform: translateY(50%) rotate(45deg); /* Adjust the position to center */
+}
+
+
+/* Ensure there is no background or border on the button */
+.navbar-toggler {
+    padding: 0; /* Remove default padding */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none; /* Remove default outline */
+    box-shadow: none; /* Remove any box shadow */
+}
+
+/* Additional styling to ensure no outline or border appears on focus */
+.navbar-toggler:focus {
+    outline: none !important; /* Ensure no outline appears when the button is focused */
+    box-shadow: none !important; /* Ensure no shadow appears when the button is focused */
+}
+
+
+
+
+/* Navbar Navigation Styles */
+.navbar-nav {
+    margin-left: auto; /* Align links to the right */
+    display: flex; /* Ensure links are aligned in a row */
+    align-items: center; /* Center align the items vertically */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.3rem; /* Slightly increase font size */
+     /* Increase padding for bigger buttons */
+    margin-right: 1rem; /* Maintain margin between buttons */
+    border: 2px solid #ff6600; /* Light purple border */
+    border-radius: 15px; /* Rounded corners */
+    transition: all 0.3s ease; /* Smooth transition */
+     /* Light purple text */
+}
+
+.navbar-nav .nav-link.nav-item-custom:hover {
+    background-color: transparent; /* Keep background transparent */
+    color: #ff6600; /* Light purple text color */
+    border-color: #ff6600; /* Keep border color the same */
+    transform: scale(1.1); /* Slightly increase the size on hover */
+}
+
+/* Confirmation Modal Styles */
+.confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+    z-index: 1000; /* Ensure the modal is on top */
+}
+
+.confirmation-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 400px;
+    animation: slideInUp 0.5s ease-in-out;
+}
+
+.checkmark-circle {
+    color: #ff6b6b; /* Red color for alert icon */
+    margin-bottom: 1.5rem;
+    animation: popIn 0.6s ease-in-out;
+}
+
+.confirmation-title {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 2rem;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.confirmation-message {
+    margin-bottom: 1.5rem;
+    color: #666;
+    font-size: 1.2rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.confirmation-button {
+    background: #FF6600;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+    margin: 0 0.5rem; /* Add spacing between buttons */
+}
+
+.confirmation-button.cancel-button {
+    background: #e74c3c; /* Red background for cancel button */
+}
+
+.confirmation-button:hover {
+    background: #FF6600;
+    transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Mobile Navbar Adjustments */
+@media (max-width: 992px) {
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10%;
+    }
+
+    .collapse.navbar-collapse {
+        height: 85vh; /* Allow full height */
+        transform: translateY(0); /* Slide down without covering content */
+        position: relative; /* Ensure it doesn't push content down */
+    }
+    .navbar-logo {
+        width: 140px; /* Maintain the logo size */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .navbar-toggler {
+        position: absolute;
+        top: 2.5rem;
+        right: 2.5rem; /* Adjusted for better positioning */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.1rem; /* Maintain font size */
+        width: 50%; /* Make links wider */
+        text-align: center;
+        margin: 1rem 0;
+    }
+}
+/* Medium to Large Screens Navbar Adjustments */
+@media (min-width: 993px) and (max-width: 1200px) {
+    .navbar-nav {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: nowrap; /* Prevent wrapping */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+        margin-right: 0.25rem; /* Decrease spacing between links */
+    }
+
+    .navbar-logo {
+        width: 140px; /* Slightly reduce logo size */
+    }
+}
+@media (max-width: 575px) {
+    .navbar-logo {
+        width: 100px; /* Reduce logo size for mobile */
+    }
+    .menu-icon {
+        width: 30px;
+        height: 25px;
+       
+    }
+    .navbar-nav .nav-link {
+        font-size: 1.2rem;
+        margin-right: 0.25rem; /* Decrease spacing between links */
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+    .navbar-logo {
+        width: 110px; /* Adjust logo size */
+    }
+
+    /* Adjusting the menu icon for small screens */
+    .menu-icon {
+        width: 35px;
+        height: 28px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.2rem;
+        margin-right: 0.25rem; /* Decrease spacing between links */
+    }
+}
+/* Medium devices (tablets, 768px - 992px) */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .navbar-logo {
+        width: 120px; /* Adjust logo size for tablets */
+    }
+    .navbar-nav .nav-link {
+        font-size: 1.2rem;
+        margin-right: 0.25rem; /* Decrease spacing between links */
+    }
+
+}
