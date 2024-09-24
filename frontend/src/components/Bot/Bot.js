@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Bot.css'; // Styling for the bot
+import axios from 'axios'; // Import axios for API calls
 
 const Bot = ({ messages, setMessages, inputValue, setInputValue, isSidebarOpen }) => {
   const [isTyping, setIsTyping] = useState(false);
   const chatWindowRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Simulate Bot Response
-  const simulateBotResponse = (userMessage) => {
-    setTimeout(() => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { type: 'bot', text: 'I am a medical assistant, how can I help?', time: new Date().toLocaleTimeString() },
-      ]);
-      setIsTyping(false);
-      scrollToBottom();
-    }, 1000);
+  // Function to make API request to the Django backend
+  const fetchBotResponse = async (userMessage) => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/get-data/', { message: userMessage });
+      return response.data.response;  // The GPT-2 generated response from the backend
+    } catch (error) {
+      console.error("Error fetching bot response:", error);
+      return "Sorry, there was an error processing your request.";
+    }
   };
 
   // Send Message Handler
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim() === '') return;
 
     const userMessage = inputValue;
@@ -29,7 +29,16 @@ const Bot = ({ messages, setMessages, inputValue, setInputValue, isSidebarOpen }
     ]);
     setInputValue(''); // Clear the input field
     setIsTyping(true);
-    simulateBotResponse(userMessage);
+
+    // Fetch the response from the backend
+    const botResponse = await fetchBotResponse(userMessage);
+
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { type: 'bot', text: botResponse, time: new Date().toLocaleTimeString() },
+    ]);
+    setIsTyping(false);
+    scrollToBottom();
   };
 
   // Handle Enter Key

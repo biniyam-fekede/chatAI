@@ -9,7 +9,11 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes, force_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.password_validation import validate_password
-
+from .model_service import ModelService
+from rest_framework.decorators import api_view
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
@@ -187,3 +191,22 @@ from django.http import HttpResponse
 
 def home(request):
     return HttpResponse("Welcome to the Homepage!")
+
+
+#########################################################
+model_service = ModelService()
+
+@csrf_exempt  # Temporarily disable CSRF for simplicity
+def get_data(request):
+    if request.method == 'POST':
+        # Parse the JSON request from the frontend
+        data = json.loads(request.body)
+        user_input = data.get('message', '')
+
+        # Get model prediction from GPT-2
+        response_text = model_service.predict(user_input)
+
+        # Send the response back as JSON
+        return JsonResponse({'response': response_text})
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
