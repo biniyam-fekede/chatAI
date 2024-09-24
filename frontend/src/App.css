@@ -1,20 +1,34 @@
-/* Ensure the body takes full height */
+/* Ensure the body and html have no extra padding or margin */
 html, body {
-  height: 100%;
   margin: 0;
-  display: flex;
-  flex-direction: column;
+  padding: 0;
+  height: 100%;
 }
 
-/* Flexbox container for the entire page */
+/* Ensure the main container has no margin or padding */
 .page-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Full height of the viewport */
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-/* Main content should take up available space */
+/* Make sure the content section takes up full space with no margin */
 .content {
-  flex: 1; /* Pushes the footer to the bottom */
-  padding: 20px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove any default padding or margin from headers */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure there are no extra margins for any div elements */
+div {
+  margin: 0;
+  padding: 0;
 }

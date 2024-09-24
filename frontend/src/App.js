@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from './components/Navbar/Navbar';
-import Footer from './components/Footer/Footer';
-import ResetPassword from './components/Authentication/ResetPassword'
-import ResetPasswordConfirm from './components/Authentication/ResetPasswordConfirm'
-import SignInRegister from './components/Authentication/SignInRegister'
+import ResetPassword from './components/Authentication/ResetPassword';
+import ResetPasswordConfirm from './components/Authentication/ResetPasswordConfirm';
+import SignIn from './components/SignIn/SignIn'; // Import the new SignIn component
+import NotFound from './components/NotFound/NotFound';
 import './App.css'; // Import the CSS for the page-container and flexbox layout
 
 const App = () => {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/data/')
-            .then(response => {
-                setData(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }, []);
-
+    const [data, setData] = useState([]);  // Define state here
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
 
     const handleLoginChange = (status) => {
@@ -34,26 +23,63 @@ const App = () => {
         setIsLoggedIn(false);
     };
 
+    const fetchData = async () => {
+        const token = localStorage.getItem('authToken'); // Get token from localStorage or sessionStorage
+
+        if (!token) {
+            console.log('User is not signed in');
+            return; // Return early if the user is not signed in
+        }
+
+        try {
+            // Include token in the Authorization header
+            const response = await axios.get('http://127.0.0.1:8000/api/data/', {
+                headers: {
+                    Authorization: `Bearer ${token}` // Assuming you're using a Bearer token
+                }
+            });
+            console.log(response.data);
+            setData(response.data); // Handle your response data
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <Router>
             <div className="page-container"> {/* Flexbox container */}
-                <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-                
-                <main className="content"> {/* Main content */}
-                    <h1>Data from Backend</h1>
-                    {data.map(item => (
-                        <p key={item.id}>{item.name}</p>
-                    ))}
-                </main>
                 <Routes>
+                    {/* Render Navbar on all routes except SignIn */}
                     <Route
-                            path="/SignInRegister"
-                            element={isLoggedIn ? <Navigate to="/" /> : <SignInRegister isLoggedIn={isLoggedIn} onLoginChange={handleLoginChange} />} 
-                        />
-                    <Route path="/reset-password" element={<ResetPassword />} />
-                    <Route path="/reset-password/:uidb64/:token" element={<ResetPasswordConfirm />} />
+                        path="/*"
+                        element={
+                            <>
+                                <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+                                <main className="content"> {/* Main content */}
+                                    <Routes>
+                                        {/* Normal homepage route */}
+                                        <Route path="/" element={<></>} />
+
+                                        {/* Other routes */}
+                                        <Route path="/reset-password" element={<ResetPassword />} />
+                                        <Route path="/reset-password/:uidb64/:token" element={<ResetPasswordConfirm />} />
+                                        <Route path="*" element={<NotFound />} />
+                                    </Routes>
+                                </main>
+                            </>
+                        }
+                    />
+
+                    {/* Separate route for SignIn that does not include Navbar */}
+                    <Route
+                        path="/SignInRegister"
+                        element={isLoggedIn ? <Navigate to="/" /> : <SignIn onLoginChange={handleLoginChange} />}
+                    />
                 </Routes>
-                <Footer /> {/* Footer */}
             </div>
         </Router>
     );

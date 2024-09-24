@@ -1,0 +1,21 @@
+/* SignIn.css */
+.signin-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+}
+
+.header {
+    height: 10vh;
+}
+
+.signin-container {
+    flex-grow: 2; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    height: 10vh;
+}

@@ -1,0 +1,42 @@
+/* Header.css */
+.header {
+    background-color: #f1f1f1;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    z-index: 1000;
+    width: 100%;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo-image {
+    width: 130px;
+    height: auto;
+}
+
+/* Style for the Home Icon */
+.home-icon {
+    font-size: 2.4rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    margin-right: 20px;
+}
+
+.home-icon:hover {
+    color: #ff4500;
+    transform: scale(1.2);
+}

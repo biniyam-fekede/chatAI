@@ -1,0 +1,286 @@
+
+.previous-conversations {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.previous-conversations h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+.previous-conversations h3::after {
+    content: '';
+    width: 50px;
+    height: 4px;
+    background-color: #ff6600;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 5px;
+}
+
+
+.sign-in-message {
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+
+.previous-conversations ul {
+    list-style-type: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.previous-conversations ul li {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+
+.previous-conversations ul li:hover {
+    background-color: #ff6600;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #ff6600;
+    color: white !important;
+}
+
+.conversation-title {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+
+.icon {
+    color: #ff6600;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+
+.previous-conversations ul li:hover .icon {
+    color: white; 
+}
+
+.previous-conversations ul li:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+
+.sidebar-sign-in {
+    margin-top: auto; 
+    text-align: center;
+    padding: 20px 0;
+}
+
+.sidebar-sign-in a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-sign-in a:hover {
+    background-color: #e65a00;
+}
+
+
+.sign-in-container {
+    margin-top: auto; 
+    padding: 20px 0;
+    text-align: center;
+}
+
+
+.sign-in-button {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.sign-in-button:hover {
+    background-color: #e65a00;
+}
+
+
+.sign-in-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.5);
+}
+
+/* Logout Confirmation Modal Overlay */
+.confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Logout Confirmation Modal */
+.confirmation-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease;
+}
+
+.confirmation-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600;
+    margin-bottom: 1.5rem;
+}
+
+
+.confirmation-message {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+
+.confirmation-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+
+.confirmation-button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.confirmation-button:hover {
+    background-color: #e65a00;
+}
+
+.cancel-button {
+    background-color: #ddd;
+    color: #333;
+}
+
+.cancel-button:hover {
+    background-color: #bbb;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .confirmation-modal {
+        max-width: 90%; 
+        padding: 1.5rem;
+    }
+
+    .confirmation-title {
+        font-size: 1.4rem; 
+    }
+
+    .confirmation-message {
+        font-size: 1rem; 
+    }
+
+    .confirmation-buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .confirmation-button {
+        width: auto;
+        min-width: 90px;
+        padding: 8px 16px;
+    }
+}
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .confirmation-modal {
+        max-width: 50%; 
+        padding: 2rem;
+    }
+
+    .confirmation-title {
+        font-size: 1.6rem; 
+    }
+
+    .confirmation-message {
+        font-size: 1.1rem;
+    }
+
+    .confirmation-buttons {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .confirmation-button {
+        min-width: 100px; 
+        padding: 10px 18px;
+    }
+}

@@ -223,7 +223,7 @@ function SignInRegister({ onLoginChange, isLoggedIn }) {
                 setShowWelcome(true);
                 setTimeout(() => {
                     onLoginChange(true);
-                    navigate('/dashboard'); // Redirect to dashboard after login
+                    navigate('/dashboard'); 
                 }, 1500);
             }
         } catch (error) {

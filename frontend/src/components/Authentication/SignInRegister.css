@@ -2,11 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align items to the start of the container */
-    height: 85vh; /* Full viewport height */
+    max-height: 80vh; 
 
     padding: 1rem;
     box-sizing: border-box; /* Ensure padding is included in height calculations */
-    padding-top: 5vh; /* Add top padding to position the form slightly lower */
+    padding-top: 5vh;
     margin-bottom: 25vh;
 }
 .welcome-message-overlay {
@@ -20,7 +20,7 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
-    animation: fadeIn 1s ease-out; /* Extend fade-in duration */
+    animation: fadeIn 1s ease-out; 
 }
 
 .welcome-message {
@@ -29,7 +29,7 @@
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
-    animation: slideInUp 1s ease-out, fadeOut 1s ease-in 2.5s forwards; /* Extend visibility and fade-out duration */
+    animation: slideInUp 1s ease-out, fadeOut 1s ease-in 2.5s forwards; 
 }
 
 @keyframes fadeIn {
@@ -301,13 +301,13 @@ input[type="password"]::-webkit-inner-spin-button {
 
 .auth-form {
     background-color: white;
-    padding: 1.5rem; /* Adjusted padding */
+    padding: 1.5rem; 
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     width: 100%;
     max-width: 450px;
     animation: fadeInUp 0.5s ease-in-out;
-    overflow-y: auto; /* Allow form to scroll if necessary */
+    overflow-y: auto; 
 }
 
 @keyframes fadeInUp {
@@ -322,10 +322,10 @@ input[type="password"]::-webkit-inner-spin-button {
 }
 
 h2 {
-    margin-bottom: 1rem; /* Reduce margin-bottom */
+    margin-bottom: 1rem; 
     color: #333;
     text-align: center;
-    font-size: 2rem; /* Slightly reduced font size */
+    font-size: 2rem; 
     animation: fadeIn 0.7s ease-in-out;
 }
 
@@ -355,16 +355,16 @@ h2 {
 }
 
 .auth-field input {
-    padding: 0.8rem; /* Reduce padding to make the fields smaller */
+    padding: 0.8rem; 
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 1rem; /* Reduce font size slightly */
+    font-size: 1rem; 
     width: 100%;
     transition: border-color 0.3s ease;
 }
 
 .auth-field input:focus {
-    border-color:#ff6600; /* Theme color */
+    border-color:#ff6600; 
     outline: none;
 }
 /* Auth Select (Dropdown) Styling */
@@ -384,13 +384,13 @@ h2 {
 }
 
 .auth-select:focus {
-    border-color: #ff6600; /* Theme color */
+    border-color: #ff6600; 
     outline: none;
-    background-color: #eaf2ff; /* Match the focus background color of input fields */
+    background-color: #eaf2ff; 
 }
 
 .auth-select.invalid {
-    border-color: #e74c3c; /* Red border color for invalid fields */
+    border-color: #e74c3c; 
     background-color: #ffe6e6;
 }
 
@@ -398,7 +398,7 @@ h2 {
 /* General select field styling to match input fields */
 /* Set the text color for the select field */
 .auth-select {
-    background-color: #f8f9fa; /* Same background color as inputs */
+    background-color: #f8f9fa; 
     border: 1px solid #ccc;
     padding: 0.8rem;
     border-radius: 8px;
@@ -406,40 +406,40 @@ h2 {
     width: 100%;
     appearance: none;
     box-sizing: border-box;
-    color: #6c757d; /* Match placeholder text color */
-    font-weight: 400; /* Match placeholder font weight */ /* Set text color to match other input fields */
+    color: #6c757d;
+    font-weight: 400;
     background-image: url('data:image/svg+xml;utf8,<svg fill="%23667eea" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
-    background-position: right 1rem center; /* Position the arrow */
-    background-size: 35px 35px; /* Size of the arrow */
+    background-position: right 1rem center;
+    background-size: 35px 35px;
 }
 
 /* Set text color when the select field is focused */
 .auth-select:focus {
-    border-color:#ff6600; /* Focus border color */
-    background-color: #eef2ff; /* Focus background color */
+    border-color:#ff6600;
+    background-color: #eef2ff;
     outline: none;
-    color: #333; /* Ensure text color stays consistent on focus */
+    color: #333;
 }
 
 
 /* Remove the focus outline for normal states */
 .auth-select:not(:focus) {
     outline: none;
-    background-color: #f8f9fa; /* Same as the non-focused state */
-    border-color: #ccc; /* Match input field border */
+    background-color: #f8f9fa;
+    border-color: #ccc;
 }
 
 
 
 .auth-select.invalid {
-    border-color: #e74c3c; /* Red border color for invalid fields */
+    border-color: #e74c3c;
     background-color: #ffe6e6;
 }
 
 .auth-select.invalid:hover,
 .auth-select.invalid:focus {
-    border-color: #e74c3c; /* Red border color for invalid fields */
+    border-color: #e74c3c;
     background-color: #ffe6e6;
     outline: none;
 }
@@ -448,32 +448,32 @@ h2 {
     color: #333; /* Option text color */
 }
 
-/* For consistency with other input fields */
+
 .auth-field select {
-    padding-right: 2.5rem; /* Ensure consistent padding */
-    box-sizing: border-box; /* Include padding and border in the element's width and height */
+    padding-right: 2.5rem;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
     .auth-select {
-        font-size: 0.9rem; /* Adjust font size for smaller screens */
+        font-size: 0.9rem; 
     }
 }
 
 
 .auth-select option {
-    color: #333; /* Option text color */
+    color: #333; 
 }
 
-/* For consistency with other input fields */
+
 .auth-field select {
-    padding-right: 2.5rem; /* Ensure consistent padding */
-    box-sizing: border-box; /* Include padding and border in the element's width and height */
+    padding-right: 2.5rem; 
+    box-sizing: border-box; 
 }
 
 @media (max-width: 768px) {
     .auth-select {
-        font-size: 0.9rem; /* Adjust font size for smaller screens */
+        font-size: 0.9rem; 
     }
 }
 
@@ -485,7 +485,7 @@ h2 {
     margin-top: 5%;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1.2rem; /* Reduce font size slightly */
+    font-size: 1.2rem; 
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -502,7 +502,7 @@ h2 {
 }
 
 .auth-toggle span {
-    color:#ff6600;  /* Theme color */
+    color:#ff6600;  
     cursor: pointer;
     font-weight: bold;
 }
@@ -513,7 +513,7 @@ h2 {
 
 @media (max-width: 768px) {
     .auth-form {
-        padding: 1rem; /* Further reduce padding for smaller screens */
+        padding: 1rem; 
         max-width: 90%;
     }
 

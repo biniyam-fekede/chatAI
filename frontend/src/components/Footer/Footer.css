@@ -1,40 +1,43 @@
 html, body {
-    height: 100%; /* Ensure body takes full viewport height */
+    height: 100%;
     margin: 0;
 }
 
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Make container full viewport height */
+    min-height: 100vh;
 }
 
 main {
-    flex: 1; /* Expand main content to push footer down */
+    flex: 1;
 }
 
 /* Footer styles */
 .footer {
-    padding: 1rem 0; /* Adjust padding for a compact footer */
+    padding: 1rem 0; 
     text-align: center;
-    margin-top: auto; /* Keep footer at the bottom */
-    font-size: 0.9rem; /* Set font size */
-    background-color: #f7f7f7 !important; /* Light gray background */
-    padding: 0.2rem 1rem; /* Narrower padding for a slimmer navbar */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9); /* Subtle shadow */
+    margin-top: auto;
+    font-size: 0.8rem;
+    background-color: #f7f7f7 !important;
+    padding: 0.2rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);
+    max-width: 100% !important;
+    max-height: 10vh;
+    font-weight: 500;
 
 }
 
 
 .footer-link {
-    color: #ff6600; /* Custom link color */
-    text-decoration: none; /* Remove underline */
-    margin: 0 0.5rem; /* Add space between links */
+    color: #ff6600;
+    text-decoration: none;
+    margin: 0 0.5rem;
 }
 p {
     color:  #ff6600;
 }
 
 .footer-link:hover {
-    text-decoration: underline; /* Underline links on hover */
+    text-decoration: underline;
 }
