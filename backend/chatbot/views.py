@@ -9,95 +9,48 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes, force_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.password_validation import validate_password
-from .model_service import ModelService
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
-# Register Serializer
-class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True)
-    password2 = serializers.CharField(write_only=True, required=True)
-    phone_number = serializers.CharField(required=False, allow_blank=True)
-
-    class Meta:
-        model = MyUser
-        fields = ('email', 'first_name', 'last_name', 'phone_number', 'password', 'password2')
-
-    def validate(self, data):
-        if data['password'] != data['password2']:
-            raise serializers.ValidationError("Passwords do not match.")
-        return data
-
-    def create(self, validated_data):
-        user = MyUser(
-            email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            phone_number=validated_data.get('phone_number', '')
-        )
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
+from .models import Message
+from .huggingface_service import query_huggingface  
+from .serializers import (
+    RegisterSerializer,
+    LoginSerializer,
+    PasswordResetRequestSerializer,
+    PasswordResetConfirmSerializer,
+)
 
 
-# Login Serializer
-class LoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    password = serializers.CharField()
-
-    def validate(self, data):
-        email = data.get('email')
-        password = data.get('password')
-
-        # Authenticate the user
-        user = authenticate(email=email, password=password)
-        if not user:
-            raise serializers.ValidationError("Invalid credentials or user does not exist.")
-        return {
-            'user': user
-        }
-
-
-# Password Reset Request Serializer
-class PasswordResetRequestSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-
-    def validate_email(self, value):
-        if not MyUser.objects.filter(email=value).exists():
-            raise serializers.ValidationError('User with this email does not exist.')
-        return value
-
-
-# Password Reset Confirm Serializer
-class PasswordResetConfirmSerializer(serializers.Serializer):
-    password = serializers.CharField(write_only=True, validators=[validate_password])
-    password2 = serializers.CharField(write_only=True)
-    token = serializers.CharField()
-    uidb64 = serializers.CharField()
-
-    def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError("Passwords do not match.")
-        return attrs
-
-    def save(self, **kwargs):
+@csrf_exempt
+def get_data(request):
+    if request.method == 'POST':
         try:
-            uid = force_str(urlsafe_base64_decode(self.validated_data['uidb64']))
-            user = MyUser.objects.get(pk=uid)
-            token = self.validated_data['token']
+            data = json.loads(request.body)
+            user_input = data.get('message', '')
 
-            # Check if the token is valid
-            if not PasswordResetTokenGenerator().check_token(user, token):
-                raise serializers.ValidationError("Token is invalid or has expired.")
+            if not user_input:
+                return JsonResponse({'error': 'No message found in the request'}, status=400)
 
-            # Set the new password
-            user.set_password(self.validated_data['password'])
-            user.save()
+            # Context for the assistant
+            system_context = """
+            You are an advanced personal assistant designed to assist medical professionals with accurate, actionable health advice. When answering questions about health conditions such as headaches, provide detailed steps for relief, advice on when to seek medical help, and always prioritize safety and accuracy.
 
-        except (TypeError, ValueError, OverflowError, MyUser.DoesNotExist):
-            raise serializers.ValidationError("Invalid token or user.")
+            Avoid guessing and misinformation: If the question is unclear or requires more details to provide an accurate response, ask follow-up questions.
+            """
+
+            # Query the Hugging Face API for a response
+            bot_response = query_huggingface(user_input, system_context)
+
+            # Return the response as JSON
+            return JsonResponse({'response': bot_response})
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON input'}, status=400)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 # Registration View
@@ -174,39 +127,8 @@ class PasswordResetConfirmView(GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# Example API for returning some data
-from rest_framework.decorators import api_view
-
-@api_view(['GET'])
-def get_data(request):
-    data = [
-        {'id': 1, 'name': 'Item 1'},
-        {'id': 2, 'name': 'Item 2'},
-    ]
-    return Response(data)
-
-
-# Home View
-from django.http import HttpResponse
-
 def home(request):
     return HttpResponse("Welcome to the Homepage!")
 
 
-#########################################################
-model_service = ModelService()
 
-@csrf_exempt  # Temporarily disable CSRF for simplicity
-def get_data(request):
-    if request.method == 'POST':
-        # Parse the JSON request from the frontend
-        data = json.loads(request.body)
-        user_input = data.get('message', '')
-
-        # Get model prediction from GPT-2
-        response_text = model_service.predict(user_input)
-
-        # Send the response back as JSON
-        return JsonResponse({'response': response_text})
-
-    return JsonResponse({'error': 'Invalid request method'}, status=400)

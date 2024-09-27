@@ -9,7 +9,6 @@ import NotFound from './components/NotFound/NotFound';
 import './App.css'; // Import the CSS for the page-container and flexbox layout
 
 const App = () => {
-    const [data, setData] = useState([]);  // Define state here
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
 
     const handleLoginChange = (status) => {
@@ -22,32 +21,6 @@ const App = () => {
         localStorage.removeItem('userRole'); // Remove the user role
         setIsLoggedIn(false);
     };
-
-    const fetchData = async () => {
-        const token = localStorage.getItem('authToken'); // Get token from localStorage or sessionStorage
-
-        if (!token) {
-            console.log('User is not signed in');
-            return; // Return early if the user is not signed in
-        }
-
-        try {
-            // Include token in the Authorization header
-            const response = await axios.get('http://127.0.0.1:8000/api/data/', {
-                headers: {
-                    Authorization: `Bearer ${token}` // Assuming you're using a Bearer token
-                }
-            });
-            console.log(response.data);
-            setData(response.data); // Handle your response data
-        } catch (error) {
-            console.error('There was an error!', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     return (
         <Router>

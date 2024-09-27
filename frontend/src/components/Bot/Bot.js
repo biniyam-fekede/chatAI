@@ -10,13 +10,16 @@ const Bot = ({ messages, setMessages, inputValue, setInputValue, isSidebarOpen }
   // Function to make API request to the Django backend
   const fetchBotResponse = async (userMessage) => {
     try {
+      console.log("User message being sent to backend:", userMessage);  // Log user message to console
       const response = await axios.post('http://localhost:8000/api/get-data/', { message: userMessage });
-      return response.data.response;  // The GPT-2 generated response from the backend
+      console.log("Response from backend:", response.data.response);  // Log response from backend
+      return response.data.response;
     } catch (error) {
       console.error("Error fetching bot response:", error);
       return "Sorry, there was an error processing your request.";
     }
   };
+  
 
   // Send Message Handler
   const handleSendMessage = async () => {
