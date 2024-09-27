@@ -1,11 +1,16 @@
 import requests
 import re
 import logging
+import os
+from dotenv import load_dotenv 
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
 # Hugging Face API token
-HUGGING_FACE_API_TOKEN = ""
+HUGGING_FACE_API_TOKEN =  os.getenv('HUGGING_FACE_TOKEN')
+if HUGGING_FACE_API_TOKEN is None:
+    raise ValueError("Hugging Face API token not found in environment variables")
 
 # Model ID (use your correct model)
 MODEL_ID = "meta-llama/Meta-Llama-3.1-70B-Instruct"

@@ -142,7 +142,7 @@ html, body {
     }
 
     .sidebar {
-        width: 68%; /* Adjust sidebar width for small screens */
+        width: 68%;
     }
 
     .main-content {
