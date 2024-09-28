@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+// Navbar.js
+
+import React, { useState, useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Logo from '../../images/Logo.png';
 import PreviousConversations from '../PreviousConversations/PreviousConversations';
 import Bot from '../Bot/Bot';
 
-function Navbar({ isLoggedIn, onLogout }) {  // Use isLoggedIn from App.js and onLogout function
+function Navbar({ isLoggedIn, onLogout }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 769);
-    const [messages, setMessages] = useState([]);
-    const [inputValue, setInputValue] = useState('');
+    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1200);
+    const [messages, setMessages] = useState([]); // Added this line
+    const [inputValue, setInputValue] = useState(''); // Added this line
 
     const toggleSidebar = () => {
         // Only allow toggling sidebar on small screens
@@ -20,7 +22,7 @@ function Navbar({ isLoggedIn, onLogout }) {  // Use isLoggedIn from App.js and o
 
     useEffect(() => {
         const handleResize = () => {
-            const isLarge = window.innerWidth >= 1069;
+            const isLarge = window.innerWidth >= 1200;
             setIsLargeScreen(isLarge);
 
             // Automatically open sidebar on large screens and close on small screens
@@ -45,7 +47,7 @@ function Navbar({ isLoggedIn, onLogout }) {  // Use isLoggedIn from App.js and o
                     </Link>
 
                     {/* Menu Icon visible only on small screens */}
-                    { !isLargeScreen && (
+                    {!isLargeScreen && (
                         <div
                             className={`menu-icon ${isSidebarOpen ? 'open' : ''}`}
                             onClick={toggleSidebar}
@@ -63,6 +65,7 @@ function Navbar({ isLoggedIn, onLogout }) {  // Use isLoggedIn from App.js and o
             <div className="content-wrapper">
                 <div className={`main-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
                     <Bot
+                        isSidebarOpen={isSidebarOpen}
                         messages={messages}
                         setMessages={setMessages}
                         inputValue={inputValue}
@@ -73,10 +76,9 @@ function Navbar({ isLoggedIn, onLogout }) {  // Use isLoggedIn from App.js and o
                 {/* Sidebar content */}
                 <div className={`sidebar ${isSidebarOpen ? 'visible' : ''}`}>
                     <PreviousConversations 
-                        isSignedIn={isLoggedIn}  // Use isLoggedIn passed from App.js
-                        isSidebarOpen={isSidebarOpen}
-                        isSmallScreen={!isLargeScreen}
-                        onLogout={onLogout}  // Use onLogout passed from App.js
+                        isSignedIn={isLoggedIn}
+                        onLogout={onLogout}
+                        setIsSidebarOpen={setIsSidebarOpen} // Pass setIsSidebarOpen here
                     />
                 </div>
             </div>

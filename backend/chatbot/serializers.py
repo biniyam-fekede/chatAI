@@ -5,6 +5,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes, force_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.password_validation import validate_password
+from .models import Message
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -90,3 +91,9 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
         except (TypeError, ValueError, OverflowError, MyUser.DoesNotExist):
             raise serializers.ValidationError("Invalid token or user.")
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['id', 'title', 'conversation', 'timestamp', 'user']
+        read_only_fields = ['id', 'timestamp', 'user']

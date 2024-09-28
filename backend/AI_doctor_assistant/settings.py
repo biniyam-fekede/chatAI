@@ -1,6 +1,8 @@
 from pathlib import Path
 from datetime import timedelta
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,7 +10,8 @@ SECRET_KEY = 'django-insecure-)4=%$q1ekg!9-6w06=-4y9ie-8-o6u1-h0w1)2!6&l@vaujxi=
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -112,11 +115,21 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
-
+# Email settings - Checking if environment variables are loaded properly
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Your Gmail address
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Your Gmail app password
+
+# Fetching the email-related environment variables
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# Ensure the email environment variables are set
+if EMAIL_HOST_USER is None:
+    raise ValueError("EMAIL_HOST_USER not found in environment variables")
+
+if EMAIL_HOST_PASSWORD is None:
+    raise ValueError("EMAIL_HOST_PASSWORD not found in environment variables")
+
 DEFAULT_FROM_EMAIL = 'passwordresetemail@gmail.com'  # The email to use as sender
