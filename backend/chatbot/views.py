@@ -9,7 +9,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes, force_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.password_validation import validate_password
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,  permission_classes
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -21,7 +21,11 @@ from .serializers import (
     LoginSerializer,
     PasswordResetRequestSerializer,
     PasswordResetConfirmSerializer,
+    MessageSerializer
 )
+from rest_framework.permissions import IsAuthenticated
+from .models import Message
+
 
 
 @csrf_exempt
@@ -130,5 +134,95 @@ class PasswordResetConfirmView(GenericAPIView):
 def home(request):
     return HttpResponse("Welcome to the Homepage!")
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def save_conversation(request):
+    user = request.user
+    conversation_id = request.data.get('conversation_id')
+    title = request.data.get('title', 'Untitled Conversation')
+    conversation_data = request.data.get('conversation', [])
+
+    if conversation_id:
+        # Update existing conversation
+        try:
+            conversation = Message.objects.get(id=conversation_id, user=user)
+            conversation.title = title
+            conversation.conversation = conversation_data
+            conversation.save()
+            return Response({'message': 'Conversation updated successfully'}, status=status.HTTP_200_OK)
+        except Message.DoesNotExist:
+            return Response({'error': 'Conversation not found'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        # Create new conversation
+        conversation = Message.objects.create(user=user, title=title, conversation=conversation_data)
+        return Response({
+            'message': 'Conversation created successfully',
+            'conversation_id': conversation.id
+        }, status=status.HTTP_201_CREATED)
 
 
+
+# Get all conversations for a user (list titles)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_conversations(request):
+    user = request.user
+    conversations = Message.objects.filter(user=user).order_by('-timestamp')
+    serializer = MessageSerializer(conversations, many=True)
+    return Response(serializer.data)
+
+# Get a specific conversation by ID
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_conversation_detail(request, conversation_id):
+    try:
+        conversation = Message.objects.get(id=conversation_id, user=request.user)
+        serializer = MessageSerializer(conversation)
+        return Response(serializer.data)
+    except Message.DoesNotExist:
+        return Response({'error': 'Conversation not found'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_conversation_title(request, conversation_id):
+    try:
+        # Get the conversation by ID
+        conversation = Message.objects.get(id=conversation_id, user=request.user)
+
+        # Get the new title from the request data
+        new_title = request.data.get('title', None)
+
+        if not new_title:
+            return Response({'error': 'Title is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Update the title and save the conversation
+        conversation.title = new_title
+        conversation.save()
+
+        return Response({'message': 'Title updated successfully.'}, status=status.HTTP_200_OK)
+
+    except Message.DoesNotExist:
+        return Response({'error': 'Conversation not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_latest_conversation(request):
+    user = request.user
+    try:
+        latest_conversation = Message.objects.filter(user=user).latest('timestamp')
+        serializer = MessageSerializer(latest_conversation)
+        return Response(serializer.data, status=200)
+    except Message.DoesNotExist:
+        return Response({'detail': 'No conversation found'}, status=404)
+    except Exception as e:
+        return Response({'detail': str(e)}, status=500)  # For catching any other errors
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def start_new_conversation(request):
+    user = request.user
+    # Create a new conversation with an empty message list
+    new_conversation = Message.objects.create(user=user, conversation=[], title="New Conversation")
+    return Response({'conversation_id': new_conversation.id}, status=status.HTTP_201_CREATED)

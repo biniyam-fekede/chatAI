@@ -5,8 +5,11 @@ html, body {
 
 .page-container {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    flex-direction: column; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    
+
+
 }
 
 main {
@@ -19,13 +22,11 @@ main {
     text-align: center;
     margin-top: auto;
     font-size: 0.8rem;
-    background-color: #f7f7f7 !important;
+    background-color: #f7f7f7;
     padding: 0.2rem 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.9);
     max-width: 100% !important;
     max-height: 10vh;
     font-weight: 500;
-
 }
 
 

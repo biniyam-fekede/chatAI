@@ -186,7 +186,7 @@ html, body {
 /* Chat Header */
 .chat-header {
   padding: 20px;
-  background-color: #ff6600;
+  background: linear-gradient(135deg, #ff6600, #ff9500);
   color: white;
   text-align: center;
   font-size: 1.5rem;

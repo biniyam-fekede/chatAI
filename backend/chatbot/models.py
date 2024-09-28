@@ -44,8 +44,9 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 # Model to store the conversation
 class Message(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=255, default="Untitled Conversation") 
     conversation = models.JSONField(default=list)  # Store conversation as a list of user-bot exchanges
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Conversation with {self.user.email if self.user else "Anonymous"} at {self.timestamp}'
+        return f'Conversation titled "{self.title}" with {self.user.email if self.user else "Anonymous"} at {self.timestamp}'
