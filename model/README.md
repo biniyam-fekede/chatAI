@@ -114,10 +114,6 @@ pip install -q -U transformers datasets accelerate peft trl bitsandbytes wandb
 
 Contributions to improve the dataset preparation, fine-tuning process, or model performance are welcome. Please submit pull requests or open issues to discuss potential changes.
 
-## License
-
-[Include appropriate license information here]
-
 ## Acknowledgments
 
 - Meta AI for the Llama model series
