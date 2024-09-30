@@ -28,8 +28,9 @@ Before proceeding, ensure that you have installed the required dependencies. Run
 
 ```bash
 !pip install -q -U transformers datasets accelerate peft trl bitsandbytes wandb
+exit
 
-# How to Use the Fine-Tuned Llama-3.1-8B AI Doctor's Assistant Model
+## How to Use the Fine-Tuned Llama-3.1-8B AI Doctor's Assistant Model
 
 The **Llama-3.1-8B AI Doctor's Assistant** model has been fine-tuned for medical question-answering tasks. You can easily integrate this model into your project using the Hugging Face `transformers` library.
 
