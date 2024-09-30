@@ -28,6 +28,12 @@ The **Llama-3.1-8B AI Doctor's Assistant** model has been fine-tuned for medical
 
 👉 **[View and access the model on Hugging Face](https://huggingface.co/Samuelawud/Llama-3-1-8B-AI-Doctors-Assistant)**
 
+## Prerequisites
+
+Before proceeding, ensure that you have installed the required dependencies. Run the following command to install the necessary libraries:
+
+!pip install -q -U transformers datasets accelerate peft trl bitsandbytes wandb
+
 ## 1. Loading the Model and Tokenizer
 
 You can load the fine-tuned model and tokenizer directly from Hugging Face with the following code:
@@ -50,14 +56,6 @@ outputs = model.generate(inputs['input_ids'], max_length=128)
 response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 print(response)
-exit
 
-## Prerequisites
-
-Before proceeding, ensure that you have installed the required dependencies. Run the following command to install the necessary libraries:
-
-```bash
-!pip install -q -U transformers datasets accelerate peft trl bitsandbytes wandb
-exit
 
 
