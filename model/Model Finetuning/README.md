@@ -22,15 +22,7 @@ The fine-tuning process involves:
 - **Training the model** on the medical question-answer dataset.
 - **Saving and pushing the fine-tuned model** to Hugging Face.
 
-## Prerequisites
-
-Before proceeding, ensure that you have installed the required dependencies. Run the following command to install the necessary libraries:
-
-```bash
-!pip install -q -U transformers datasets accelerate peft trl bitsandbytes wandb
-exit
-
-## How to Use the Fine-Tuned Llama-3.1-8B AI Doctor's Assistant Model
+# How to Use the Fine-Tuned Llama-3.1-8B AI Doctor's Assistant Model
 
 The **Llama-3.1-8B AI Doctor's Assistant** model has been fine-tuned for medical question-answering tasks. You can easily integrate this model into your project using the Hugging Face `transformers` library.
 
@@ -58,5 +50,14 @@ outputs = model.generate(inputs['input_ids'], max_length=128)
 response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 print(response)
+exit
+
+## Prerequisites
+
+Before proceeding, ensure that you have installed the required dependencies. Run the following command to install the necessary libraries:
+
+```bash
+!pip install -q -U transformers datasets accelerate peft trl bitsandbytes wandb
+exit
 
 
