@@ -9,7 +9,7 @@ AI Doctor's Assistant is a comprehensive web application designed to provide med
 The project is divided into three main components:
 
 1. Model Component
-2. Backend Component (Django)
+2. Backend Component (Django)(PostgreSQL)
 3. Frontend Component (React)
 
 Each component is housed in its own directory within the project structure.
