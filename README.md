@@ -76,6 +76,7 @@ The backend is built using Django, providing a robust and scalable server-side s
 - Database models for user profiles and conversation history
 - Integration with the fine-tuned Llama model for processing queries
 - Password reset functionality
+- PostgresSQL Database
 
 ### Setup
 
@@ -132,6 +133,25 @@ To set up the entire project:
 4. Start the development servers:
    - For backend: `python manage.py runserver` (from the `backend` directory)
    - For frontend: `npm start` (from the `frontend` directory)
+
+## Database Setup and Structure
+
+This project uses **PostgreSQL** as the database backend, replacing the default SQLite. The database stores all essential data related to the chatbot, user messages, authentication, and session management.
+
+### Database Setup
+
+To use PostgreSQL as the database backend for this web app, follow the steps below to ensure proper setup and migration:
+
+1. **Install PostgreSQL**:  
+   Ensure that PostgreSQL is installed and running on your machine. You can download PostgreSQL from [here](https://www.postgresql.org/download/).
+
+2. **Create a PostgreSQL Database**:  
+   After installing PostgreSQL, create a new database for the project:
+
+   ```bash
+   psql -U postgres
+   CREATE DATABASE mydatabase;
+
 
 ## Usage
 
