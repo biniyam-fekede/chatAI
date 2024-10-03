@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
 import './Bot.css'; // Styling for the bot
 import axios from 'axios'; // Import axios for API calls
-import { useLocation } from 'react-router-dom'; // Import useLocation to access URL parameters
 
 const Bot = ({ isSidebarOpen }) => {
   const [messages, setMessages] = useState([]); // Manage messages state internally
@@ -12,6 +12,7 @@ const Bot = ({ isSidebarOpen }) => {
   const chatWindowRef = useRef(null);
   const inputRef = useRef(null);
   const location = useLocation(); // Access the current location
+  const navigate = useNavigate(); // Initialize navigate
 
   // Function to make API request to the Django backend
   const fetchBotResponse = async (userMessage) => {
@@ -98,46 +99,56 @@ const Bot = ({ isSidebarOpen }) => {
     scrollToBottom();
   };
 
-  // Load conversation when component mounts or when the URL changes
   useEffect(() => {
     const fetchSavedConversation = async () => {
-      // Get the conversationId from the URL parameters
-      const params = new URLSearchParams(location.search);
-      const selectedConversationId = params.get('conversationId');
-
-      if (selectedConversationId) {
-        try {
-          const token = localStorage.getItem('authToken');
-          if (!token) {
-            console.error('No auth token found');
-            return;
-          }
-
-          const response = await axios.get(
-            `http://localhost:8000/api/conversations/${selectedConversationId}/`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setMessages(response.data.conversation);
-          setConversationTitle(response.data.title);
-          setConversationId(response.data.id);
-        } catch (error) {
-          console.error('Error fetching conversation:', error);
-        }
-      } else {
-        // No selected conversation, start a new one
+      if (location.state && location.state.isNewConversation) {
+        // New conversation initiated
         setMessages([]);
         setConversationTitle('');
         setConversationId(null);
+  
+        // Clear the state to prevent re-triggering
+        navigate(location.pathname, { replace: true });
+      } else {
+        // Existing conversation or first load
+        const params = new URLSearchParams(location.search);
+        const selectedConversationId = params.get('conversationId');
+  
+        if (selectedConversationId) {
+          // Load existing conversation
+          try {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+              console.error('No auth token found');
+              return;
+            }
+  
+            const response = await axios.get(
+              `http://localhost:8000/api/conversations/${selectedConversationId}/`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            setMessages(response.data.conversation);
+            setConversationTitle(response.data.title);
+            setConversationId(response.data.id);
+          } catch (error) {
+            console.error('Error fetching conversation:', error);
+          }
+        } else {
+          // No conversationId in URL, start a new conversation
+          setMessages([]);
+          setConversationTitle('');
+          setConversationId(null);
+        }
       }
     };
-
+  
     fetchSavedConversation();
-  }, [location.search]); // Re-run when the URL search string changes
-
+  }, [location]); // Re-run when the location changes
+  
   // Function to save conversation after bot responds
   useEffect(() => {
     if (!isTyping && messages.length > 0) {

@@ -65,7 +65,7 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
     setIsSidebarOpen(false);
 
     // Navigate to the chat page without a conversationId to start a new conversation
-    navigate('/');
+    navigate('/', { state: { isNewConversation: true } });
   };
 
   // Save updated title
@@ -173,7 +173,7 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
           <p>Here you can:</p>
           <ul className="features-list">
             <li>
-              <FaSave className="feature-icon" /> Save your past conversations for future reference
+              <FaSave className="feature-icon" /> Save your past conversations for future reference after creating an account
             </li>
             <li>
               <FaQuestionCircle className="feature-icon" /> Get personalized responses to your questions
@@ -185,7 +185,7 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
               <FaHistory className="feature-icon" /> Keep track of your consultations and advice history
             </li>
           </ul>
-          <div className="sign-in-message">Sign in to save or view your previous conversations.</div>
+         
         </div>
       )}
 
