@@ -11,13 +11,13 @@
 
 
 .previous-conversations h3 {
-    font-size: 1.8rem;
+    font-size: 1.6rem !important;
     font-weight: bold;
     color: #ff6600;
     margin-bottom: 20px;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     position: relative;
     font-family: 'Arial', sans-serif;
 }
@@ -499,8 +499,8 @@
     }
 
     .sign-in-button {
-        font-size: 1rem; /* Smaller button text */
-        padding: 10px 25px;
+        font-size: 1.5rem; /* Smaller button text */
+        padding: 15px 30px;
         width: 90%; /* Take full width */
         margin: 15px auto;
     }
