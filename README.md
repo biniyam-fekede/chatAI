@@ -7,6 +7,8 @@ AI Doctor's Assistant is a comprehensive web application designed to provide med
 ## Demo Video
 
 [![Watch the demo video](https://img.youtube.com/vi/SeEk0V1Cli0/0.jpg)](https://www.youtube.com/watch?v=SeEk0V1Cli0)
+
+## Demo Video Link 
 https://www.youtube.com/watch?v=SeEk0V1Cli0
 
 
