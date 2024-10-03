@@ -4,6 +4,13 @@
 
 AI Doctor's Assistant is a comprehensive web application designed to provide medical information and answers to health-related questions. The application utilizes a fine-tuned version of Meta's Llama 3.1 8B parameter model, trained on a large dataset of medical questions and answers. This project combines advanced natural language processing capabilities with a user-friendly web interface, making medical information more accessible to users.
 
+## Demo Video
+
+Click on the image below to watch a video demonstration of the AI Doctor's Assistant in action:
+
+[![AI Doctor's Assistant Demonstration](https://img.youtube.com/vi/SeEk0V1Cli0/0.jpg)](https://youtu.be/SeEk0V1Cli0)
+
+
 ## Project Structure
 
 The project is divided into three main components:
