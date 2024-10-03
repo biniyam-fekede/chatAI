@@ -144,7 +144,7 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
                         if (e.key === 'Escape') {
                           setEditingConversationId(null);
                           setEditedTitle('');
-                        } // Cancel on Escape key
+                        }
                       }}
                       autoFocus
                     />

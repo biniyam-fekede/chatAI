@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
-import './Bot.css'; // Styling for the bot
+import { useLocation, useNavigate } from 'react-router-dom';
+import './Bot.css'; 
 import axios from 'axios'; // Import axios for API calls
 
 const Bot = ({ isSidebarOpen }) => {
