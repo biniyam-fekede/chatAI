@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import './PreviousConversations.css';
+import React, { useState, useEffect } from "react";
+import "./PreviousConversations.css";
 import {
   FaCommentDots,
   FaEdit,
@@ -8,35 +8,39 @@ import {
   FaQuestionCircle,
   FaUserAlt,
   FaHistory,
-} from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+} from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
   const [showModal, setShowModal] = useState(false); // For the sign-out confirmation modal
-  const [showLoggedOutConfirmation, setShowLoggedOutConfirmation] = useState(false); // Logged out message
+  const [showLoggedOutConfirmation, setShowLoggedOutConfirmation] =
+    useState(false); // Logged out message
   const [conversations, setConversations] = useState([]); // For fetching conversations dynamically
   const [editingConversationId, setEditingConversationId] = useState(null); // For tracking edited conversations
-  const [editedTitle, setEditedTitle] = useState(''); // Store edited title
+  const [editedTitle, setEditedTitle] = useState(""); // Store edited title
 
   const navigate = useNavigate();
 
   // Fetch previous conversations from the backend
   const fetchPreviousConversations = async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem("authToken");
       if (!token) {
-        console.error('No auth token found');
+        console.error("No auth token found");
         return;
       }
-      const response = await axios.get('http://localhost:8000/api/conversations/', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:8000/api/conversations/",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setConversations(response.data);
     } catch (error) {
-      console.error('Error fetching conversations:', error);
+      console.error("Error fetching conversations:", error);
     }
   };
 
@@ -55,7 +59,7 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
       // Navigate to the chat page (Bot component) with the conversationId as a query parameter
       navigate(`/?conversationId=${conversationId}`);
     } catch (error) {
-      console.error('Error loading conversation:', error);
+      console.error("Error loading conversation:", error);
     }
   };
 
@@ -65,14 +69,14 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
     setIsSidebarOpen(false);
 
     // Navigate to the chat page without a conversationId to start a new conversation
-    navigate('/', { state: { isNewConversation: true } });
+    navigate("/", { state: { isNewConversation: true } });
   };
 
   // Save updated title
   const saveUpdatedTitle = async (conversationId, originalTitle) => {
     try {
-      if (editedTitle !== originalTitle && editedTitle.trim() !== '') {
-        const token = localStorage.getItem('authToken');
+      if (editedTitle !== originalTitle && editedTitle.trim() !== "") {
+        const token = localStorage.getItem("authToken");
         await axios.put(
           `http://localhost:8000/api/conversations/${conversationId}/update-title/`,
           { title: editedTitle },
@@ -84,15 +88,17 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
         );
         setConversations((prevConversations) =>
           prevConversations.map((conversation) =>
-            conversation.id === conversationId ? { ...conversation, title: editedTitle } : conversation
+            conversation.id === conversationId
+              ? { ...conversation, title: editedTitle }
+              : conversation
           )
         );
       }
       // Reset editing state
       setEditingConversationId(null);
-      setEditedTitle('');
+      setEditedTitle("");
     } catch (error) {
-      console.error('Error updating title:', error);
+      console.error("Error updating title:", error);
     }
   };
 
@@ -103,13 +109,13 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
 
   // Confirm sign-out
   const confirmSignOut = () => {
-    localStorage.removeItem('authToken'); // Remove the token from localStorage
+    localStorage.removeItem("authToken"); // Remove the token from localStorage
     onLogout(); // Call onLogout to update the parent state
     setShowModal(false); // Close the modal
     setShowLoggedOutConfirmation(true); // Show the logged-out confirmation
 
     setTimeout(() => {
-      navigate('/SignInRegister'); // Redirect to sign-in page after logging out
+      navigate("/SignInRegister"); // Redirect to sign-in page after logging out
       setShowLoggedOutConfirmation(false); // Hide the confirmation after 2 seconds
     }, 2000);
   };
@@ -125,25 +131,34 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
 
       {isSignedIn ? (
         <>
-          <button className="new-conversation-button" onClick={startNewConversation}>
+          <button
+            className="new-conversation-button"
+            onClick={startNewConversation}
+          >
             <FaPlus className="new-conversation-icon" /> New Conversation
           </button>
           <ul>
             {conversations.map((conversation) => (
               <li key={conversation.id}>
-                <FaCommentDots className="icon" onClick={() => loadConversation(conversation.id)} />
+                <FaCommentDots
+                  className="icon"
+                  onClick={() => loadConversation(conversation.id)}
+                />
                 {editingConversationId === conversation.id ? (
                   <>
                     <input
                       type="text"
                       value={editedTitle}
                       onChange={(e) => setEditedTitle(e.target.value)}
-                      onBlur={() => saveUpdatedTitle(conversation.id, conversation.title)} // Save on blur
+                      onBlur={() =>
+                        saveUpdatedTitle(conversation.id, conversation.title)
+                      } // Save on blur
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter') saveUpdatedTitle(conversation.id, conversation.title); // Save on Enter key press
-                        if (e.key === 'Escape') {
+                        if (e.key === "Enter")
+                          saveUpdatedTitle(conversation.id, conversation.title); // Save on Enter key press
+                        if (e.key === "Escape") {
                           setEditingConversationId(null);
-                          setEditedTitle('');
+                          setEditedTitle("");
                         }
                       }}
                       autoFocus
@@ -151,7 +166,10 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
                   </>
                 ) : (
                   <>
-                    <span className="conversation-title" onClick={() => loadConversation(conversation.id)}>
+                    <span
+                      className="conversation-title"
+                      onClick={() => loadConversation(conversation.id)}
+                    >
                       {conversation.title}
                     </span>
                     <FaEdit
@@ -169,23 +187,26 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
         </>
       ) : (
         <div className="additional-info">
-          <h2>Welcome to AI Doctor's Assistant!</h2>
+          <h2>Welcome to Research Bin!</h2>
           <p>Here you can:</p>
           <ul className="features-list">
             <li>
-              <FaSave className="feature-icon" /> Save your past conversations for future reference after creating an account
+              <FaSave className="feature-icon" /> Save your past conversations
+              for future reference after creating an account
             </li>
             <li>
-              <FaQuestionCircle className="feature-icon" /> Get personalized responses to your questions
+              <FaQuestionCircle className="feature-icon" /> Get personalized
+              responses to your questions
             </li>
             <li>
-              <FaUserAlt className="feature-icon" /> Access our expert advice anytime, anywhere
+              <FaUserAlt className="feature-icon" /> Access our expert advice
+              anytime, anywhere
             </li>
             <li>
-              <FaHistory className="feature-icon" /> Keep track of your consultations and advice history
+              <FaHistory className="feature-icon" /> Keep track of your research
+              history
             </li>
           </ul>
-         
         </div>
       )}
 
@@ -206,12 +227,17 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
         <div className="confirmation-overlay">
           <div className="confirmation-modal">
             <h3 className="confirmation-title">Confirm Logout</h3>
-            <p className="confirmation-message">Are you sure you want to sign out?</p>
+            <p className="confirmation-message">
+              Are you sure you want to sign out?
+            </p>
             <div className="confirmation-buttons">
               <button className="confirmation-button" onClick={confirmSignOut}>
                 Yes
               </button>
-              <button className="confirmation-button cancel-button" onClick={cancelSignOut}>
+              <button
+                className="confirmation-button cancel-button"
+                onClick={cancelSignOut}
+              >
                 No
               </button>
             </div>
@@ -224,7 +250,9 @@ const PreviousConversations = ({ isSignedIn, onLogout, setIsSidebarOpen }) => {
         <div className="confirmation-overlay">
           <div className="confirmation-modal">
             <h3 className="confirmation-title">Logged Out</h3>
-            <p className="confirmation-message">You have successfully logged out.</p>
+            <p className="confirmation-message">
+              You have successfully logged out.
+            </p>
           </div>
         </div>
       )}

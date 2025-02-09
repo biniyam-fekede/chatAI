@@ -1,534 +1,522 @@
 .previous-conversations {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-    overflow: hidden;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
 }
 
-
 .previous-conversations h3 {
-    font-size: 1.6rem !important;
-    font-weight: bold;
-    color: #ff6600;
-    margin-bottom: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-    font-family: 'Arial', sans-serif;
+  font-size: 1.6rem !important;
+  font-weight: bold;
+  color: #2c003e;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  font-family: "Arial", sans-serif;
 }
 
 .previous-conversations h3::after {
-    content: '';
-    width: 50px;
-    height: 4px;
-    background: linear-gradient(135deg, #ff6600, #ff9500);
-    display: block;
-    margin: 10px auto 0;
-    border-radius: 5px;
+  content: "";
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(135deg, #2c003e, #512363);
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 5px;
 }
 .edit-icon {
-    font-size: 1.2rem;
-    color: #ff6600;
-    transition: color 0.3s ease;
-    cursor: pointer;
+  font-size: 1.2rem;
+  color: #2c003e;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .edit-icon:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 .edit-icon:focus {
-    color: #ffffff;
+  color: #ffffff;
 }
 
-
 .edit-input {
-    flex-grow: 1;
-    font-size: 1.1rem;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin-right: 10px;
+  flex-grow: 1;
+  font-size: 1.1rem;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 10px;
 }
 
 .edit-input:focus {
-    border-color: #ff6600;
-    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
-    outline: none;
+  border-color: #2c003e;
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
+  outline: none;
 }
 
 /* Save or cancel button when editing */
-.save-button, .cancel-button {
-    background-color: #ff6600;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: none;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 5px;
+.save-button,
+.cancel-button {
+  background-color: #2c003e;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 5px;
 }
 
 .cancel-button {
-    background-color: #ccc;
+  background-color: #ccc;
 }
 
-.save-button:hover, .cancel-button:hover {
-    background-color: #e65a00;
+.save-button:hover,
+.cancel-button:hover {
+  background-color: #411054;
 }
 
 .cancel-button:hover {
-    background-color: #b3b3b3;
+  background-color: #b3b3b3;
 }
 
 /* Hover effect */
 .sign-in-message:hover {
-    transform: translateY(-5px);     /* Lifts the message slightly on hover */
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+  transform: translateY(-5px); /* Lifts the message slightly on hover */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
 }
 
 /* Animated background effect using pseudo-elements */
 .sign-in-message::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;                     /* Overly wide to allow for animation */
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
-    transform: translateX(-50%) translateY(-50%) scale(0); /* Start outside */
-    transition: transform 0.5s ease-in-out;
-    opacity: 0.5;                    /* Transparent glow effect */
-    border-radius: 50%;              /* Circular shape */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%; /* Overly wide to allow for animation */
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1),
+    transparent 70%
+  );
+  transform: translateX(-50%) translateY(-50%) scale(0); /* Start outside */
+  transition: transform 0.5s ease-in-out;
+  opacity: 0.5; /* Transparent glow effect */
+  border-radius: 50%; /* Circular shape */
 }
 
 .sign-in-message:hover::before {
-    transform: translateX(-50%) translateY(-50%) scale(1); /* Expand on hover */
+  transform: translateX(-50%) translateY(-50%) scale(1); /* Expand on hover */
 }
 
 /* Add animated pulse effect */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .sign-in-message {
-    animation: pulse 2s infinite ease-in-out; /* Pulse animation */
+  animation: pulse 2s infinite ease-in-out; /* Pulse animation */
 }
 
 .previous-conversations ul {
-    list-style-type: none;
-    padding: 0;
-    flex-grow: 1;
-    overflow-y: auto; 
+  list-style-type: none;
+  padding: 0;
+  flex-grow: 1;
+  overflow-y: auto;
 }
-
 
 .previous-conversations ul li {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-    border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  border: 1px solid transparent;
 }
 
-
-.previous-conversations ul li:hover{
-    background-color: #ff6600;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-color: #ff6600;
-    color: white !important;
+.previous-conversations ul li:hover {
+  background-color: #2c003e;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: #2c003e;
+  color: white !important;
 }
 
 .conversation-title {
-    margin-left: 10px;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #333;
-    transition: color 0.3s ease;
+  margin-left: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s ease;
 }
-
 
 .icon {
-    color: #ff6600;
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
+  color: #2c003e;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
 }
 
-
 .previous-conversations ul li:hover .icon {
-    color: white; 
+  color: white;
 }
 
 .previous-conversations ul li:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
 }
 
-
 .sidebar-sign-in {
-    margin-top: auto; 
-    text-align: center;
-    padding: 20px 0;
+  margin-top: auto;
+  text-align: center;
+  padding: 20px 0;
 }
 
 .sidebar-sign-in a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ff6600;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2c003e;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .sidebar-sign-in a:hover {
-    background-color: #e65a00;
+  background-color: #441557;
 }
-
 
 .sign-in-container {
-    margin-top: auto; 
-    padding: 20px 0;
-    text-align: center;
+  margin-top: auto;
+  padding: 20px 0;
+  text-align: center;
 }
 
-
 .sign-in-button {
-    padding: 10px 20px;
-    background-color: #ff6600;
-    color: white;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    font-size: 1.5rem;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    border-radius: 50px;
-    font-weight: 600;
-
+  padding: 10px 20px;
+  background-color: #2c003e;
+  color: white;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border-radius: 50px;
+  font-weight: 600;
 }
 
 .sign-in-button:hover {
-    background-color: #e65a00;
+  background-color: #441755;
 }
 
-
 .sign-in-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.5);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.5);
 }
 
 .additional-info {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto; /* Center the container */
-    padding: 30px;
-    border-radius: 20px;
-    position: relative;
-    animation: fadeIn 0.8s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    overflow: visible !important;  /* Prevent overflow of content */
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto; /* Center the container */
+  padding: 30px;
+  border-radius: 20px;
+  position: relative;
+  animation: fadeIn 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  overflow: visible !important; /* Prevent overflow of content */
 }
 
 .additional-info h2 {
-    color: #ff6600;
-    }
+  color: #2c003e;
+}
 .additional-info p {
-    color: black
+  color: black;
 }
 
 .features-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-    overflow-y: visible;
-    height: auto;   
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: visible;
+  height: auto;
 }
 
 .features-list li {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #444;
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    width: 90%; 
-    max-width: 500px; 
-    overflow: visible;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #444;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 90%;
+  max-width: 500px;
+  overflow: visible;
 }
 
 .features-list li:hover {
-    background-color: #f0f4f8;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background-color: #f0f4f8;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .feature-icon {
-    color: #ff6600;
-    font-size: 1.5rem;
-    margin-right: 15px;
-    transition: transform 0.3s ease;
+  color: #2c003e;
+  font-size: 1.5rem;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
 }
 
 .features-list li:hover .feature-icon {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 /* Adjust Sign-In Message Below Additional Info */
 .sign-in-message {
-    font-size: 1.2rem;
-    color: #fff;
-    text-align: center;
-    margin: 20px auto;
-    padding: 20px 30px;
-    background: linear-gradient(135deg, #ff6600, #ff9500);
-    border-radius: 25px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    max-width: 500px; 
-    width: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    position: relative;
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  margin: 20px auto;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #2c003e, #551e6b);
+  border-radius: 25px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
 }
-
 
 /* Hover Effect for the Sign-In Message */
 .sign-in-message:hover {
-    transform: translateY(-5px);     
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3); 
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
 }
 
 .sign-in-container {
-    margin-top: 30px;
-    text-align: center;
+  margin-top: 30px;
+  text-align: center;
 }
 
 /* Animations */
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes slideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .new-conversation-button {
-    display: flex;
-    align-items: center;
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .new-conversation-button:hover {
-    
-    transform: scale(1.02);
-  }
-  
-  .new-conversation-icon {
-    margin-right: 8px;
-  }
+  display: flex;
+  align-items: center;
+  background-color: #2c003e;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  width: 100%;
+  justify-content: center;
+}
+
+.new-conversation-button:hover {
+  transform: scale(1.02);
+}
+
+.new-conversation-icon {
+  margin-right: 8px;
+}
 
 /* Logout Confirmation Modal Overlay */
 .confirmation-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 /* Logout Confirmation Modal */
 .confirmation-modal {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 15px;
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.5s ease;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
 }
 
 .confirmation-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ff6600;
-    margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c003e;
+  margin-bottom: 1.5rem;
 }
-
 
 .confirmation-message {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 2rem;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
 }
-
 
 .confirmation-buttons {
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
 }
 
-
 .confirmation-button {
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
+  background-color: #2c003e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
 }
 
 .confirmation-button:hover {
-    background-color: #e65a00;
+  background-color: #4b1e5e;
 }
 
 .cancel-button {
-    background-color: #ddd;
-    color: #333;
+  background-color: #ddd;
+  color: #333;
 }
 
 .cancel-button:hover {
-    background-color: #bbb;
+  background-color: #bbb;
 }
 
-
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 2000px) {
-    .previous-conversations h3 {
-        font-size: 1rem;
-    }
+  .previous-conversations h3 {
+    font-size: 1rem;
+  }
 
-    .additional-info {
-        padding: 20px;
-        max-width: 100%; 
-        margin: 20px auto;
-    }
+  .additional-info {
+    padding: 20px;
+    max-width: 100%;
+    margin: 20px auto;
+  }
 
-    .features-list {
-        margin-top: 10px;
-    }
+  .features-list {
+    margin-top: 10px;
+  }
 
-    .features-list li {
-        font-size: 1rem; 
-        padding: 10px;
-        margin-bottom: 15px; 
-    }
+  .features-list li {
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
 
-    .feature-icon {
-        font-size: 3rem; 
-        margin-right: 10px;
-    }
+  .feature-icon {
+    font-size: 3rem;
+    margin-right: 10px;
+  }
 
-    /* Adjust Sign-In Message */
-    .sign-in-message {
-        font-size: 1rem; /* Smaller font size */
-        max-width: 100%; /* Use more screen width for small devices */
-        margin-bottom: 60px;
-    }
+  /* Adjust Sign-In Message */
+  .sign-in-message {
+    font-size: 1rem; /* Smaller font size */
+    max-width: 100%; /* Use more screen width for small devices */
+    margin-bottom: 60px;
+  }
 
-    .sign-in-button {
-        font-size: 1.5rem; /* Smaller button text */
-        padding: 15px 30px;
-        width: 90%; /* Take full width */
-        margin: 15px auto;
-    }
+  .sign-in-button {
+    font-size: 1.5rem; /* Smaller button text */
+    padding: 15px 30px;
+    width: 90%; /* Take full width */
+    margin: 15px auto;
+  }
 
-    /* Confirmation Modal */
-    .confirmation-modal {
-        max-width: 90%;
-        padding: 1.5rem;
-    }
+  /* Confirmation Modal */
+  .confirmation-modal {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
 
-    .confirmation-title {
-        font-size: 1.4rem;
-    }
+  .confirmation-title {
+    font-size: 1.4rem;
+  }
 
-    .confirmation-message {
-        font-size: 1rem;
-    }
+  .confirmation-message {
+    font-size: 1rem;
+  }
 
-    .confirmation-buttons {
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-    }
+  .confirmation-buttons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
 
-    .confirmation-button {
-        width: auto;
-        min-width: 90px;
-        padding: 8px 16px;
-    }
+  .confirmation-button {
+    width: auto;
+    min-width: 90px;
+    padding: 8px 16px;
+  }
 }
-

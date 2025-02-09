@@ -1,33 +1,33 @@
 /* Ensure everything fills the viewport */
 .ConfrimPass {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Full viewport height */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .header {
-    height: 10vh; /* Assuming 10% of the viewport height is for the header */
+  height: 10vh; /* Assuming 10% of the viewport height is for the header */
 }
 
 .ConfirmPass-container {
-    flex-grow: 1; /* This makes sure it takes up the remaining space */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f3f3f3 !important;
+  flex-grow: 1; /* This makes sure it takes up the remaining space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3 !important;
 }
 
 .footer {
-    height: 10vh;
-    background-color: #f1f1f1 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: auto; /* Pushes the footer to the bottom */
-    padding: 0; /* Remove padding */
-    position: relative;
+  height: 10vh;
+  background-color: #f1f1f1 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: auto; /* Pushes the footer to the bottom */
+  padding: 0; /* Remove padding */
+  position: relative;
 }
